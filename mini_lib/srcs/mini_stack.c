@@ -1,8 +1,17 @@
 #include "../incl/mini_lib.h"
 
-void		dump_stack()
+void		dump_stack(t_list *list, void (*func)(void*))
 {
+	t_node *head;
 
+	if (!list || !func)
+		return ;
+	head = list->head;
+	while (head != list->tail)
+	{
+		func(head->data);
+		head = head->next;
+	}
 }
 
 int 		push(t_list **list, void *data, size_t size)

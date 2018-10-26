@@ -57,6 +57,16 @@ typedef struct		s_env
 	t_status		status;
 }					t_env;
 
+# ifndef DTAB_LEN
+# define DTAB_LEN 0
+# endif
+
+typedef struct		s_dtab
+{
+	char			*name;
+	int				(*func)(t_env*, const char*, va_list *ap);
+}					t_dtab;
+
 /*
 ** initialize our environment struct, passing
 ** the env by reference and mallocing the
@@ -67,12 +77,29 @@ typedef struct		s_env
 int					mini_init(t_env **env);
 
 /*
+** @p env :
+** @p errmsg :
+** @p location :
+** ---------------------------------------
 ** error handler function which sets our
 ** status values appropriately, such as in
 ** the case of an error, our status.error
 ** will be set to a custom errno and the
 ** minishell will act accordingly
 */
-void		mini_error(t_env *env, const char *errmsg);
+void				mini_error(t_env *env, const char *errmsg, const char *location);
+
+/*
+** @p env	: our environment struct containing necessary
+** 				runtime information
+** @p input : our const input, immutable as we are only reading
+** 				it and acting on it. This parameter controls
+** 				execution of functions directly after parsing
+** 				so we must verify that it is correct before
+** 				execution
+** ------------------------------------------------------------
+** the parser parses and verifies input -- lol
+*/
+char				**mini_parser(t_env *env, const char *input)
 
 #endif

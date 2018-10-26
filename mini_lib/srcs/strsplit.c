@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incl/mini_lib.h"
 
-char	**ft_strsplit(char const *s, char c)
+char	**strsplit(char const *s, char c)
 {
-	int		split;
+	unsigned int		i;
+	int					j;
+	unsigned int		split;
+	unsigned int		start;
 	char	**ret;
-	int		i;
-	int		j;
-	int		start;
 
 	if (s == 0 || c == 0)
 		return (0);
-	split = ft_count_words(s, c);
+	split = count_words(s, c);
 	if (!(ret = (char**)malloc((sizeof(char*) * (split + 1)))))
 		return (0);
 	i = 0;
@@ -34,7 +34,7 @@ char	**ft_strsplit(char const *s, char c)
 		start = i;
 		while (s[i] && s[i] != c)
 			i++;
-		ret[j] = ft_strsub(s, start, i - start);
+		ret[j] = strsub(s, start, i - start);
 		i++;
 	}
 	ret[j] = 0;

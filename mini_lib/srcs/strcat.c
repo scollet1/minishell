@@ -10,10 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incl/mini_lib.h"
 
-char	*ft_strcat(char *s1, const char *s2)
+char	*mini_cat(int done, ...)
 {
-	ft_strcpy(&s1[ft_strlen(s1)], s2);
+	va_list *ap;
+	char 	*ret;
+	char 	*str;
+
+	if (!(ret = (char*)memalloc((sizeof(char) * 1))))
+		return (NULL);
+	va_start(ap, NULL);
+	while (!done)
+	{
+		str = va_arg(ap, char*);
+		ret = mini_strcat(ret, str);
+		done--;
+	}
+	va_end(ap);
+	return (ret);
+}
+
+char	*mini_strcat(char *s1, const char *s2)
+{
+	mini_strcpy(&s1[mini_strlen(s1)], s2);
 	return (s1);
 }

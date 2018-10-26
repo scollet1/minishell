@@ -3,6 +3,7 @@
 
 # include <fcntl.h>
 # include <string.h>
+# include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -56,15 +57,46 @@ typedef struct		s_list
 	t_node			*tail;
 }					t_list;
 
-ssize_t				mini_getline(const short fd, char **line);
-int					atoi(const char *str);
-void				mini_bzero(void *s, size_t n);
-int					count_words(const char *s, char c);
+/*
+** Helpers
+*/
 int					isalnum(int c);
 int					isalpha(int c);
 int					isascii(int c);
 int					isdigit(int c);
 int					isprint(int c);
+
+/*
+** Lists
+*/
+t_list				*new_list(void);
+t_node				*new_node(void *data, size_t size);
+
+/*
+** Memory
+*/
+void				mini_bzero(void *s, size_t n);
+
+/*
+** Numbers
+*/
+int					atoi(const char *str);
+
+/*
+** Stack
+*/
+void				dump_stack(t_list *list, void (*func)(void*));
+int					push(t_list **list, void *data, size_t size);
+
+/*
+** Strings
+*/
+char				*mini_cat(int done, ...);
+char				*mini_strcat(char *s1, const char *s2);
+ssize_t				mini_getline(const short fd, char **line);
+unsigned int		count_words(const char *s, char c);
+
+
 char				*itoa(int n);
 char				*itoa_base(int n, int base);
 void				lstadd(t_list **alst, t_list *new);
@@ -89,7 +121,6 @@ void				putnbr(int n);
 void				putnbr_fd(int n, int fd);
 void				putstr(const char *s);
 void				putstr_fd(const char *s, int fd);
-char				*mini_strcat(char *s1, const char *s2);
 char				*strchr(const char *s, int c);
 void				strclr(char *s);
 int					strcmp(const char *s1, const char *s2);

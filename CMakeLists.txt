@@ -79,6 +79,6 @@ set(SOURCE_FILES
         srcs/mini_print.c
         srcs/mini_setenv.c
         srcs/mini_tilde.c
-        srcs/mini_unsetenv.c mini_lib/srcs/mini_stack.c mini_lib/srcs/mini_queue.c)
+        srcs/mini_unsetenv.c mini_lib/srcs/mini_stack.c mini_lib/srcs/mini_queue.c mini_lib/srcs/list.c srcs/mini_parser.c srcs/mini_dispatch.c)
 
 add_executable(minishell ${SOURCE_FILES})
