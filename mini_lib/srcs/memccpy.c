@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incl/mini_lib.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+void	*mini_memccpy(void *dst, const void *src, int c, size_t n)
 {
 	char		*tdst;
 	const char	*fsrc;

@@ -1,4 +1,4 @@
-NAME = libhermes.a
+NAME = mini_lib.a
 
 CC = gcc
 
@@ -12,11 +12,16 @@ ARCHIVE = ar rc
 
 INDEX = ranlib
 
-HEADDR = incl/libhermes.h
+HEADER = incl/mini_lib.h
 
-FILES = memory.c
+FILES = mini_stack.c putstr.c node.c list.c mini_strlen.c           \
+        mini_memcpy.c mini_getline.c strnew.c mini_memmove.c        \
+        mini_strcat.c mini_strcpy.c mini_memdel.c mini_memchr.c     \
+        mini_strcmp.c strsplit.c strsub.c memalloc.c mini_memset.c  \
+        mini_bzero.c
 
-SRC_DIR = src
+
+SRC_DIR = srcs
 
 SRC = $(addprefix $(SRC_DIR)/, $(FILES))
 

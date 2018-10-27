@@ -12,7 +12,7 @@
 # endif
 
 # ifndef PROMPT
-# define PROMPT "~->"
+# define PROMPT "~-> "
 # endif
 
 typedef struct		s_error
@@ -64,7 +64,7 @@ typedef struct		s_env
 typedef struct		s_dtab
 {
 	char			*name;
-	int				(*func)(t_env*, const char*, va_list *ap);
+	int				(*func)(t_env*, char**);
 }					t_dtab;
 
 /*
@@ -87,7 +87,7 @@ int					mini_init(t_env **env);
 ** will be set to a custom errno and the
 ** minishell will act accordingly
 */
-void				mini_error(t_env *env, const char *errmsg, const char *location);
+int					mini_error(t_env *env, const char *errmsg, const char *var, const char *location);
 
 /*
 ** @p env	: our environment struct containing necessary
@@ -100,6 +100,14 @@ void				mini_error(t_env *env, const char *errmsg, const char *location);
 ** ------------------------------------------------------------
 ** the parser parses and verifies input -- lol
 */
-char				**mini_parser(t_env *env, const char *input)
+int					mini_dispatch(t_env *env, const char *input);
+
+char				**mini_parser(const char *input);
+int					mini_exit(t_env *env, char **opts);
+int					mini_echo(t_env *env, char **opts);
+int					mini_setenv(t_env *env, char **opts);
+int					mini_unsetenv(t_env *env, char **opts);
+int 				mini_env(t_env *env, char**opts);
+void				print(int done, ...);
 
 #endif

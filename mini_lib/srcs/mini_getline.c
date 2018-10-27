@@ -32,10 +32,11 @@ ssize_t		mini_getline(const short fd, char **line)
 	char		*str;
 	static char *block[MAX_FD];
 
-	if (!(line) || fd < 0 || fd > MAX_FD)
+	if (!line || fd < 0)
 		return (-1);
-	if (!(block[fd]))
+	if (!block[fd])
 		block[fd] = strnew(0);
+	ret = 1;
 	while (ret > 0)
 	{
 		if ((block[fd] = learn_to_read(fd, block, &ret)) && ret < 0)

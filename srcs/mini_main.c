@@ -5,7 +5,7 @@ char 	*mini_prompt(const char *prompt)
 	ssize_t ret;
 	char	*input;
 
-	putendl(prompt);
+	putstr(prompt);
 	while (!(ret = mini_getline(STDIN_FILENO, &input)))
 		;
 	if (ret < 0)
@@ -13,7 +13,7 @@ char 	*mini_prompt(const char *prompt)
 	return (input);
 }
 
-void	mini_shell(t_env *env)
+int		mini_shell(t_env *env)
 {
 	char *input;
 
@@ -22,23 +22,12 @@ void	mini_shell(t_env *env)
 		if ((input = mini_prompt(PROMPT)))
 		{
 			if (mini_dispatch(env, input) == FAILURE)
-			{
-				mini_error(env, __func__, "dispatch failed");
-			}
+				return (mini_error(env, __func__, NULL, "dispatch failed"));
 		}
+		else
+			return (mini_error(env, __func__, WHICH(input), "NULL"));
 	}
-	/*
-	 * 			parse input();
-	 * 			if parse == SUCCESS:
-	 * 				if exec(env, input) == FAILURE:
-	 * 					error(env, "in mini_shell(): ");
-	 * 			else:
-	 * 				error(env);
-	 * 		else:
-	 * 			error(env);
-	 */
-	(void*)input;
-	(void*)env;
+	return (SUCCESS);
 }
 
 int		main(void)
@@ -46,9 +35,13 @@ int		main(void)
 	t_env *env;
 
 	if (mini_init(&env))
-		mini_shell(env);
+	{
+		putendl(WELCOME);
+		if (mini_shell(env) == FAILURE)
+			return (mini_error(env, __func__, NULL, "failed"));
+	}
 	else
-		error(env);
+		return (mini_error(env, __func__, WHICH(env), "uninitialied"));
 	/* TODO :
 	 * initialize env
 	 * if not env:

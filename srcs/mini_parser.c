@@ -1,6 +1,6 @@
 #include "../incl/minishell.h"
 
-char		**mini_parser(t_env *env, const char *input)
+char		**mini_parser(const char *input)
 {
 	char **parsed;
 

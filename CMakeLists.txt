@@ -7,8 +7,6 @@ set(SOURCE_FILES
         incl/minishell.h
         mini_lib/incl/mini_lib.h
         mini_lib/srcs/atoi.c
-        mini_lib/srcs/bzero.c
-        mini_lib/srcs/count_words.c
         mini_lib/srcs/isalnum.c
         mini_lib/srcs/isalpha.c
         mini_lib/srcs/isascii.c
@@ -16,6 +14,7 @@ set(SOURCE_FILES
         mini_lib/srcs/isprint.c
         mini_lib/srcs/itoa.c
         mini_lib/srcs/itoa_base.c
+        mini_lib/srcs/list.c
         mini_lib/srcs/lstadd.c
         mini_lib/srcs/lstdel.c
         mini_lib/srcs/lstdelone.c
@@ -24,38 +23,38 @@ set(SOURCE_FILES
         mini_lib/srcs/lstnew.c
         mini_lib/srcs/memalloc.c
         mini_lib/srcs/memccpy.c
-        mini_lib/srcs/memchr.c
         mini_lib/srcs/memcmp.c
-        mini_lib/srcs/memcpy.c
-        mini_lib/srcs/memdel.c
-        mini_lib/srcs/memmove.c
-        mini_lib/srcs/memset.c
+        mini_lib/srcs/mini_bzero.c
         mini_lib/srcs/mini_getline.c
+        mini_lib/srcs/mini_memchr.c
+        mini_lib/srcs/mini_memcpy.c
+        mini_lib/srcs/mini_memdel.c
+        mini_lib/srcs/mini_memmove.c
+        mini_lib/srcs/mini_memset.c
+        mini_lib/srcs/mini_queue.c
+        mini_lib/srcs/mini_stack.c
+        mini_lib/srcs/mini_strcat.c
+        mini_lib/srcs/mini_strcmp.c
+        mini_lib/srcs/mini_strcpy.c
+        mini_lib/srcs/mini_strlen.c
+        mini_lib/srcs/node.c
         mini_lib/srcs/putchar.c
         mini_lib/srcs/putchar_fd.c
-        mini_lib/srcs/putendl.c
         mini_lib/srcs/putendl_fd.c
         mini_lib/srcs/putnbr.c
         mini_lib/srcs/putnbr_fd.c
         mini_lib/srcs/putstr.c
         mini_lib/srcs/putstr_fd.c
-        mini_lib/srcs/strcat.c
         mini_lib/srcs/strchr.c
         mini_lib/srcs/strclr.c
-        mini_lib/srcs/strcmp.c
-        mini_lib/srcs/strcpy.c
         mini_lib/srcs/strdel.c
         mini_lib/srcs/strdup.c
         mini_lib/srcs/strequ.c
         mini_lib/srcs/striter.c
         mini_lib/srcs/striteri.c
-        mini_lib/srcs/strjoin.c
-        mini_lib/srcs/strlcat.c
-        mini_lib/srcs/strlen.c
         mini_lib/srcs/strmap.c
         mini_lib/srcs/strmapi.c
         mini_lib/srcs/strncat.c
-        mini_lib/srcs/strncmp.c
         mini_lib/srcs/strncpy.c
         mini_lib/srcs/strnequ.c
         mini_lib/srcs/strnew.c
@@ -68,6 +67,7 @@ set(SOURCE_FILES
         mini_lib/srcs/tolower.c
         mini_lib/srcs/toupper.c
         srcs/mini_cd.c
+        srcs/mini_dispatch.c
         srcs/mini_echo.c
         srcs/mini_env.c
         srcs/mini_error.c
@@ -76,9 +76,9 @@ set(SOURCE_FILES
         srcs/mini_init.c
         srcs/mini_main.c
         srcs/mini_money.c
+        srcs/mini_parser.c
         srcs/mini_print.c
-        srcs/mini_setenv.c
         srcs/mini_tilde.c
-        srcs/mini_unsetenv.c mini_lib/srcs/mini_stack.c mini_lib/srcs/mini_queue.c mini_lib/srcs/list.c srcs/mini_parser.c srcs/mini_dispatch.c)
+        )
 
 add_executable(minishell ${SOURCE_FILES})

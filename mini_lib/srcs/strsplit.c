@@ -1,24 +1,34 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: scollet <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 20:31:49 by scollet           #+#    #+#             */
-/*   Updated: 2017/03/09 18:41:50 by scollet          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../incl/mini_lib.h"
 
-char	**strsplit(char const *s, char c)
+unsigned int	count_words(const char *s, char c)
+{
+	unsigned int split;
+	unsigned int split_t;
+
+	split_t = 0;
+	split = 0;
+	while (*s)
+	{
+		if (split_t == 1 && *s == c)
+			split_t = 0;
+		if (split_t == 0 && *s != c)
+		{
+			split_t = 1;
+			split++;
+		}
+		s++;
+	}
+	return (split);
+}
+
+
+char		**strsplit(char const *s, char c)
 {
 	unsigned int		i;
-	int					j;
+	unsigned int		j;
 	unsigned int		split;
 	unsigned int		start;
-	char	**ret;
+	char				**ret;
 
 	if (s == 0 || c == 0)
 		return (0);
@@ -26,8 +36,8 @@ char	**strsplit(char const *s, char c)
 	if (!(ret = (char**)malloc((sizeof(char*) * (split + 1)))))
 		return (0);
 	i = 0;
-	j = -1;
-	while (++j < split)
+	j = 0;
+	while (j < split)
 	{
 		while (s[i] && s[i] == c)
 			i++;
@@ -36,6 +46,7 @@ char	**strsplit(char const *s, char c)
 			i++;
 		ret[j] = strsub(s, start, i - start);
 		i++;
+		j++;
 	}
 	ret[j] = 0;
 	return (ret);
