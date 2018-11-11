@@ -1,5 +1,7 @@
 NAME = minishell
 
+TESTING = minishell.test
+
 CC = gcc
 
 SRC_DIR = src
@@ -23,7 +25,13 @@ $(NAME):
 		$(MAKE) -C $(MINILIB) re
 		$(CC) $(CFLAGS) $(INCL) $(SRC) $(MINILIB)/mini_lib.a -o $(NAME)
 
+$(TESTING):
+		$(MAKE) -C $(MINILIB) re
+		$(CC) $(CFLAGS) $(INCL) $(SRC) $(MINILIB)/mini_lib.a -D TESTING -o $(NAME)
+
 all: $(NAME)
+
+test: $(TESTING)
 
 clean:
 		$(RM) $(OBJDIR)

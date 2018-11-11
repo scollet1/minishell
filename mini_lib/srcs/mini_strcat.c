@@ -1,5 +1,25 @@
 #include "../incl/mini_lib.h"
 
+char	*nullcat(char *str, size_t len)
+{
+	int		i;
+	char	*tmp;
+	char 	*ret;
+	t_list	*queue;
+
+	while (len >= 0)
+	{
+		if ((tmp = mini_memchr(str, '\0', len)))
+		{
+			ret = mini_strdup(str);
+			str = tmp + 1;
+			len -= tmp - ret;
+			enqueue(queue);
+		}
+	}
+	return (cat_queue(queue));
+}
+
 char	*strjoin(const char *s1, const char *s2)
 {
 	char	*tmp;

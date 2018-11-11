@@ -138,16 +138,22 @@ void				*mini_memmove(void *dst, const void *src, size_t len);
 ** Numbers
 */
 char				*itoa(int n);
-void				putnbr(int n);
-int					atoi(const char *str);
-void				putnbr_fd(int n, int fd);
 char				*itoa_base(int n, int base);
+int					mini_atoi(const char *str);
+void				putnbr(int n);
+void				putnbr_fd(int n, int fd);
 
 /*
 ** Stack
 */
 void				dump_stack(t_list *list, void (*func)(void*));
 int					push(t_list **list, void *data, size_t size);
+
+/*
+** Queue
+*/
+void				dump_queue(t_list **queue, void (*func)(void*));
+int					enqueue(t_list **list, void *data, size_t size);
 
 /*
 ** Strings

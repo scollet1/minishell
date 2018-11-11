@@ -55,3 +55,22 @@ ssize_t		mini_getline(const short fd, char **line)
 			return (1);
 	return (0);
 }
+
+#ifdef TEST_GETLINE
+#include <stdio.h>
+
+int		main(int ac, char **av)
+{
+	int		fd;
+	char	*line;
+
+	if (ac == 2) {
+		fd = mini_atoi(av[1]);
+		mini_getline(fd, &line);
+		printf("%s\n", line);
+	} else {
+		printf("not enough arguments\n");
+	}
+	return (0);
+}
+#endif

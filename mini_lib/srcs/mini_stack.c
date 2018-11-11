@@ -10,8 +10,22 @@ void		dump_stack(t_list *list, void (*func)(void*))
 	while (head != list->tail)
 	{
 		func(head->data);
-		head = head->next;
+		pop(&list);
 	}
+}
+
+t_node		*pop(t_list **list)
+{
+	t_node	*ret;
+
+	if (!list)
+		return (NULL);
+	ret = (*list)->head;
+	(*list)->head = (*list)->head->next;
+	(*list)->head->prev = NULL;
+	ret->next = NULL;
+	ret->prev = NULL;
+	return (ret);
 }
 
 int 		push(t_list **list, void *data, size_t size)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   mini_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scollet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incl/mini_lib.h"
 
-int		ft_atoi(const char *str)
+int		mini_atoi(const char *str)
 {
 	size_t	nb;
 	size_t	i;
@@ -30,7 +30,7 @@ int		ft_atoi(const char *str)
 	}
 	else if (str[i] == '+')
 		i++;
-	while (str[i] && ft_isdigit(str[i]) == 1)
+	while (str[i] && isdigit(str[i]) == 1)
 	{
 		if (nb >= 9223372036854775807 && sign == 1)
 			return (-1);

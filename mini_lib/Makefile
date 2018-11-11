@@ -4,7 +4,7 @@ CC = gcc
 
 OBJ = obj/*.o
 
-CCFLAGS = -I.incl -Wall -Wextra -c
+CCFLAGS = -I.incl -Wall -Wextra -Werror -c
 
 RM = -rm -fr
 
@@ -18,7 +18,7 @@ FILES = mini_stack.c putstr.c node.c list.c mini_strlen.c           \
         mini_memcpy.c mini_getline.c strnew.c mini_memmove.c        \
         mini_strcat.c mini_strcpy.c mini_memdel.c mini_memchr.c     \
         mini_strcmp.c strsplit.c strsub.c memalloc.c mini_memset.c  \
-        mini_bzero.c
+        mini_bzero.c mini_atoi.c strings.c
 
 
 SRC_DIR = srcs

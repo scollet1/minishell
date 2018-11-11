@@ -16,6 +16,6 @@ char	*strsub(const char *s, unsigned int start, size_t len)
 		start++;
 		i++;
 	}
-	sub[i] = 0;
+	sub[i] = '\0';
 	return (sub);
 }

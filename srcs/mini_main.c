@@ -52,3 +52,15 @@ int		main(void)
 	 */
 	return (0);
 }
+
+#ifdef TESTING
+#include <stdio.h>
+
+int main(void) {
+	char *line;
+
+	printf("%zd\n", mini_getline(-1, &line));
+	printf("%zd\n", mini_getline(0, NULL));
+	return (0);
+}
+#endif
