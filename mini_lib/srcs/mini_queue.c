@@ -1,6 +1,6 @@
 #include "../incl/mini_lib.h"
 
-char 	*cat_queue(t_list **queue)
+char	*cat_queue(t_list **queue)
 {
 	char	*str;
 

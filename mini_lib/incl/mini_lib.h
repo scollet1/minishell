@@ -147,27 +147,39 @@ void				putnbr_fd(int n, int fd);
 ** Stack
 */
 void				dump_stack(t_list *list, void (*func)(void*));
+t_node				*pop(t_list **list);
 int					push(t_list **list, void *data, size_t size);
 
 /*
 ** Queue
 */
+char				*cat_queue(t_list **queue);
 void				dump_queue(t_list **queue, void (*func)(void*));
 int					enqueue(t_list **list, void *data, size_t size);
 
 /*
 ** Strings
 */
-void				strclr(char *s);
-void				strdel(char **as);
-void				mini_putchar(char c);
-char				*strnew(size_t size);
 char				*mini_cat(int done, ...);
+void				mini_putchar(char c);
+char				*mini_strncat(char *s1, const char *s2, size_t n);
+int					mini_strncmp(const char *s1, const char *s2, size_t n);
+char				*mini_strncpy(char *dst, const char *src, size_t len);
+
+size_t				mini_strlen(const char *s);
+
+/*
+** String Addition
+*/
+
+char				*nullcat(char *str, size_t len);
 void				putstr(const char *s);
 void				putendl(const char *s);
-size_t				mini_strlen(const char *s);
 void				putchar_fd(char c, int fd);
 char				*mini_strdup(const char *s1);
+void				strclr(char *s);
+void				strdel(char **as);
+char				*strnew(size_t size);
 char				*strchr(const char *s, int c);
 void				putstr_fd(const char *s, int fd);
 void				putendl_fd(const char *s, int fd);
@@ -183,9 +195,7 @@ char				*strjoin(const char *s1, const char *s2);
 size_t				mini_strlcat(char *dst, const char *src, size_t size);
 char				*strmap(const char *s, char (*f)(char));
 char				*strmapi(const char *s, char(*f)(unsigned int, char));
-char				*mini_strncat(char *s1, const char *s2, size_t n);
-int					mini_strncmp(const char *s1, const char *s2, size_t n);
-char				*mini_strncpy(char *dst, const char *src, size_t len);
+
 int					strnequ(const char *s1, const char *s2, size_t n);
 char				*strnstr(const char *big, const char
 *little, size_t len);

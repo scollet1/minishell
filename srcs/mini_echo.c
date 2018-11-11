@@ -46,16 +46,16 @@ int		mini_echo(t_env *env, char **opts)
 		q = open_quotes(opts[1]);
 		opts[1] = replace(opts[1], q, '\0');
 		{
-			while (!closed)
+			while (1)
 			{
-				closeq = prompt("quote> ");
+				closeq = mini_prompt("quote> ");
 				if (!strncmp(closeq, q, 1))
-					closed = 1;
+					break;
 				else
 					enqueue(&echo_queue, closeq, sizeof(closeq));
 			}
 		}
-		dump_queue(echo_queue, putstr);
+		dump_queue(&echo_queue, (void*)putstr);
 	}
 	return (SUCCESS);
 }

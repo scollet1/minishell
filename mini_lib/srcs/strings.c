@@ -18,7 +18,7 @@ char	*replace(char *strn, char find, char rplc)
 	{
 		if (*strn == find)
 			*strn = rplc;
-		strn++
+		strn++;
 	}
 	if (!rplc)
 		return (nullcat(strn, len));
