@@ -154,23 +154,24 @@ int					push(t_list **list, void *data, size_t size);
 ** Queue
 */
 char				*cat_queue(t_list **queue);
+t_node				*dequeue(t_list **queue);
 void				dump_queue(t_list **queue, void (*func)(void*));
 int					enqueue(t_list **list, void *data, size_t size);
 
 /*
 ** Strings
 */
-char				*mini_cat(int done, ...);
+char				*replace(char *strn, char find, char rplc);
 void				mini_putchar(char c);
-char				*mini_strncat(char *s1, const char *s2, size_t n);
 int					mini_strncmp(const char *s1, const char *s2, size_t n);
 char				*mini_strncpy(char *dst, const char *src, size_t len);
-
 size_t				mini_strlen(const char *s);
 
 /*
 ** String Addition
 */
+char				*mini_cat(int done, ...);
+char				*mini_strncat(char *s1, const char *s2, size_t n);
 
 char				*nullcat(char *str, size_t len);
 void				putstr(const char *s);

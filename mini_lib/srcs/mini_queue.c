@@ -5,7 +5,8 @@ char	*cat_queue(t_list **queue)
 	char	*str;
 
 	if (!queue)
-		return ;
+		return (NULL);
+	str = NULL;
 	while ((*queue)->head)
 		mini_strcat(str, dequeue(queue)->data);
 	return (str);
@@ -13,33 +14,38 @@ char	*cat_queue(t_list **queue)
 
 void	dump_queue(t_list **queue, void (*func)(void*))
 {
-	t_node *tail;
-
 	if (!queue || !func)
 		return ;
-	tail = queue->tail;
-	while (tail != queue->head)
-	{
-		func(tail->data);
-		dequeue(&queue);
-	}
+	while ((*queue)->tail)
+		func(dequeue(queue));
 }
 
 t_node	*dequeue(t_list **queue)
 {
-	t_node	*ret;
-
-	if (!queue)
-		return (NULL);
-	ret = (*queue)->tail;
-	(*queue)->tail = (*queue)->tail->prev;
-	(*queue)->tail->next = NULL;
-	ret->next = NULL;
-	ret->prev = NULL;
-	return (ret);
+	return (pop(queue));
 }
 
-int 	enqueue(t_queue **queue, void *data, size_t size)
+int 	enqueue(t_list **queue, void *data, size_t size)
 {
-	return (push(queue, data, size));
+	t_node	*node;
+
+	if (!queue)
+		return (FAILURE);
+	node = new_node(data, size);
+	if (!(*queue)->head)
+	{
+		(*queue)->head = node;
+		(*queue)->tail = node;
+		(*queue)->tail->prev = node;
+		(*queue)->tail->next = node;
+		node->prev = node;
+		node->next = node;
+		(*queue)->len++;
+		return (SUCCESS);
+	}
+	(*queue)->head->prev = node;
+	node->next = (*queue)->head;
+	(*queue)->head = node;
+	(*queue)->len++;
+	return (SUCCESS);
 }

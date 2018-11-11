@@ -1,7 +1,7 @@
 # cmake_minimum_required(VERSION <specify CMake version here>)
-project(minishell C)
+project(minishell)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 include_directories(incl)
 include_directories(mini_lib/incl)
@@ -82,4 +82,5 @@ add_executable(minishell
 		srcs/mini_money.c
 		srcs/mini_parser.c
 		srcs/mini_print.c
-		srcs/mini_tilde.c)
+		srcs/mini_tilde.c
+		minishell)
