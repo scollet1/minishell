@@ -75,6 +75,14 @@
 	# define MAX_FD 0xFFFF
 # endif
 
+//# ifndef END_LIST
+//	# define END_LIST (list) (list->head != list->tail)
+//# endif
+
+//# ifndef NEXT_LIST
+//	# define NEXT_LIST (list) (list->head = list->head->next)
+//# endif
+
 /*
 ** a node in our doubly linked
 ** list with a void pointer
@@ -106,6 +114,12 @@ typedef struct		s_list
 	t_node			*tail;
 }					t_list;
 
+typedef struct		s_tree
+{
+	size_t 			len;
+	t_list			*children;
+}					t_tree;
+
 /*
 ** Helpers
 */
@@ -116,10 +130,17 @@ int					isdigit(int c);
 int					isprint(int c);
 
 /*
+** Lexical Analysis
+*/
+char				lex(t_list **tokens, char *str, int args, ...);
+
+/*
 ** Lists
 */
 t_list				*new_list(void);
 t_node				*new_node(void *data, size_t size);
+t_tree				*list_to_nary(t_list **list);
+t_list				*va_to_list(va_list ap, int args);
 
 /*
 ** Memory
@@ -170,7 +191,7 @@ size_t				mini_strlen(const char *s);
 /*
 ** String Addition
 */
-char				*mini_cat(int done, ...);
+char				*mini_cat(int args, ...);
 char				*mini_strncat(char *s1, const char *s2, size_t n);
 
 char				*nullcat(char *str, size_t len);
@@ -208,6 +229,10 @@ char				*strtrim(const char *s);
 int					tolower(int c);
 int					toupper(int c);
 
+/*
+** Trees
+*/
+t_tree				*new_tree(void);
 
 
 void				lstadd(t_list **alst, t_list *new);

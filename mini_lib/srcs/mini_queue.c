@@ -14,10 +14,19 @@ char	*cat_queue(t_list **queue)
 
 void	dump_queue(t_list **queue, void (*func)(void*))
 {
+	t_node *node;
+
 	if (!queue || !func)
 		return ;
 	while ((*queue)->tail)
-		func(dequeue(queue));
+	{
+		if ((node = dequeue(queue)))
+		{
+			func(node->data);
+			free(node);
+			node = NULL;
+		}
+	}
 }
 
 t_node	*dequeue(t_list **queue)
@@ -29,15 +38,17 @@ int 	enqueue(t_list **queue, void *data, size_t size)
 {
 	t_node	*node;
 
-	if (!queue)
+	if (!queue || !data)
 		return (FAILURE);
 	node = new_node(data, size);
 	if (!(*queue)->head)
 	{
 		(*queue)->head = node;
 		(*queue)->tail = node;
+		(*queue)->head->next = node;
+		(*queue)->head->prev = NULL;
 		(*queue)->tail->prev = node;
-		(*queue)->tail->next = node;
+		(*queue)->tail->next = NULL;
 		node->prev = node;
 		node->next = node;
 		(*queue)->len++;

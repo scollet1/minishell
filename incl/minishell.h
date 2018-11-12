@@ -101,7 +101,7 @@ int		mini_error(t_env *env, const char *func,
 ** the parser parses and verifies input -- lol
 */
 int					mini_dispatch(t_env *env, const char *input);
-
+t_list				*quote_loop(const char *prompt, char q, t_list **queue);
 char				*mini_prompt(const char *prompt);
 char				**mini_parser(const char *input);
 int					mini_exit(t_env *env, char **opts);
@@ -109,6 +109,6 @@ int					mini_echo(t_env *env, char **opts);
 int					mini_setenv(t_env *env, char **opts);
 int					mini_unsetenv(t_env *env, char **opts);
 int 				mini_env(t_env *env, char**opts);
-void				print(int done, ...);
+void				print(int args, ...);
 
 #endif

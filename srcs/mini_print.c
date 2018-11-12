@@ -1,17 +1,17 @@
 #include "../incl/minishell.h"
 
-void		print(int done, ...)
+void		print(int args, ...)
 {
 	va_list ap;
 	char	*str;
 
 	str = NULL;
-	va_start(ap, done);
-	while (!done)
+	va_start(ap, args);
+	while (args)
 	{
 		str = va_arg(ap, char*);
 		putstr(str);
-		done--;
+		args--;
 	}
 	va_end(ap);
 }

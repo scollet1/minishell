@@ -65,7 +65,7 @@ size_t	mini_strlcat(char *dst, const char *src, size_t size)
 	return (ret + (s - src));
 }
 
-char	*mini_cat(int done, ...)
+char	*mini_cat(int args, ...)
 {
 	va_list ap;
 	char 	*ret;
@@ -74,12 +74,12 @@ char	*mini_cat(int done, ...)
 	if (!(ret = (char*)memalloc((sizeof(char) * 1))))
 		return (NULL);
 	str = NULL;
-	va_start(ap, done);
-	while (done > 0)
+	va_start(ap, args);
+	while (args > 0)
 	{
 		str = va_arg(ap, char*);
 		ret = strjoin(ret, str);
-		done--;
+		args--;
 	}
 	va_end(ap);
 	return (ret);

@@ -14,7 +14,6 @@ void		dump_stack(t_list *stack, void (*func)(void*))
 	}
 }
 
-#include <stdio.h>
 t_node		*pop(t_list **stack)
 {
 	t_node	*ret;
@@ -22,6 +21,12 @@ t_node		*pop(t_list **stack)
 	if (!stack || !*stack)
 		return (NULL);
 	ret = (*stack)->tail;
+	if ((*stack)->head == (*stack)->tail)
+	{
+		(*stack)->head = NULL;
+		(*stack)->tail = NULL;
+		return (ret);
+	}
 	(*stack)->tail = (*stack)->tail->prev;
 	(*stack)->tail->next = NULL;
 	ret->next = NULL;
@@ -40,7 +45,9 @@ int 		push(t_list **stack, void *data, size_t size)
 	{
 		(*stack)->head = node;
 		(*stack)->tail = node;
-		(*stack)->tail->prev = NULL;
+		(*stack)->head->next = node;
+		(*stack)->head->prev = NULL;
+		(*stack)->tail->prev = node;
 		(*stack)->tail->next = NULL;
 		(*stack)->len++;
 		return (SUCCESS);

@@ -1,37 +1,23 @@
 #include "../incl/minishell.h"
 
-char	open_quotes(char *str)
+t_list	*open_quotes(char *str)
 {
 	char 	q;
-	int		open;
+	t_list	*tokens;
 
-	q = '\0';
-	open = 0;
-	while (*str)
-	{
-		if ((*str == '\'' || *str == '"') && !open)
-		{
-			q = *str;
-			open = 1;
-		}
-		else if (*str == q && open)
-		{
-			q = '\0';
-			open = 0;
-		}
-		str++;
-	}
-	return (q);
+	tokens = NULL;
+	q = lex(&tokens, str, 2, '\"', '\'');
+	if (!q)
+		return (NULL);
+	else if (q != '!' && q != '.')
+		return (quote_loop("quote> ", q, &tokens));
+	return (tokens);
 }
 
-void	quote_loop(const char *prompt,
-					char *opts, char q,
-					t_list **queue)
+t_list	*quote_loop(const char *prompt, char q, t_list **queue)
 {
-	char	*str;
 	char	*closeq;
 
-	str = replace(opts, q, '\0');
 	while (1)
 	{
 		closeq = mini_prompt(prompt);
@@ -40,27 +26,22 @@ void	quote_loop(const char *prompt,
 		else
 			enqueue(queue, closeq, sizeof(closeq));
 	}
+	return (*queue);
 }
 
 int		mini_echo(t_env *env, char **opts)
 {
-	int		i;
-	char 	q;
 	t_list	*echo_queue;
 
 	echo_queue = new_list();
 	if (!env || !opts)
 		return (FAILURE);
 //	printf("%s\n", opts[0]);
-	print(1, PROMPT);
-	i = 0;
+//	print(1, PROMPT);
 	if (*(++opts))
 	{
-		q = open_quotes(*opts);
-		if (q)
-			quote_loop("quote> ", *opts, q, &echo_queue);
-		if (push(&echo_queue, *opts, sizeof(*opts)) == FAILURE)
-			return (mini_error(env, __func__, WHICH(echo_queue), "enqueue"));
+		if (!(echo_queue = open_quotes(*opts)))
+			mini_error(env, __func__, WHICH(echo_queue), "lexing");
 		dump_queue(&echo_queue, (void*)putstr);
 	}
 	print(1, "\n");

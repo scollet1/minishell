@@ -25,7 +25,7 @@ add_executable(minishell
 		mini_lib/srcs/lstnew.c
 		mini_lib/srcs/memalloc.c
 		mini_lib/srcs/memccpy.c
-		mini_lib/srcs/memcmp.c
+		mini_lib/srcs/mini_memcmp.c
 		mini_lib/srcs/mini_atoi.c
 		mini_lib/srcs/mini_bzero.c
 		mini_lib/srcs/mini_getline.c
@@ -83,4 +83,4 @@ add_executable(minishell
 		srcs/mini_parser.c
 		srcs/mini_print.c
 		srcs/mini_tilde.c
-		minishell)
+		minishell mini_lib/srcs/lexer.c mini_lib/srcs/tree.c)
