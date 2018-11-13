@@ -8,7 +8,7 @@ t_node	*new_node(void *data, size_t size)
 		return (NULL);
 	if (!(node = (t_node*)memalloc(sizeof(t_node))))
 		return (NULL);
-	mini_memcpy(&node->data, data, size);
+	node->data = data;
 	node->size = size;
 	node->next = NULL;
 	node->prev = NULL;
