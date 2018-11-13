@@ -7,6 +7,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# include <stdio.h>
+
 # if __STDC_VERSION__ < 199901L
 	# if __GNUC__ >= 2
 		# define __func__ __FUNCTION__
@@ -202,13 +204,13 @@ char				*mini_strdup(const char *s1);
 void				strclr(char *s);
 void				strdel(char **as);
 char				*strnew(size_t size);
-char				*strchr(const char *s, int c);
+//char				*strchr(const char *s, int c);
 void				putstr_fd(const char *s, int fd);
 void				putendl_fd(const char *s, int fd);
 unsigned int		count_words(const char *s, char c);
 void				striter(char *s, void (*f)(char *));
 char				*mini_strcat(char *s1, const char *s2);
-int					strcmp(const char *s1, const char *s2);
+//int					strcmp(const char *s1, const char *s2);
 ssize_t				mini_getline(const short fd, char **line);
 char				*mini_strcpy(char *dst, const char *src);
 int					strequ(const char *s1, const char *s2);
@@ -219,11 +221,10 @@ char				*strmap(const char *s, char (*f)(char));
 char				*strmapi(const char *s, char(*f)(unsigned int, char));
 
 int					strnequ(const char *s1, const char *s2, size_t n);
-char				*strnstr(const char *big, const char
-*little, size_t len);
-char				*strrchr(const char *s, int c);
+//char				*strnstr(const char *big, const char *little, size_t len);
+//char				*strrchr(const char *s, int c);
 char				**strsplit(const char *s, char c);
-char				*strstr(const char *big, const char *little);
+//char				*strstr(const char *big, const char *little);
 char				*strsub(const char *s, unsigned int start, size_t len);
 char				*strtrim(const char *s);
 int					tolower(int c);

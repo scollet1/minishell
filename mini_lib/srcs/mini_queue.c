@@ -40,17 +40,17 @@ int 	enqueue(t_list **queue, void *data, size_t size)
 
 	if (!queue || !data)
 		return (FAILURE);
-	node = new_node(data, size);
+	if (!(node = new_node(data, size)))
+		return (FAILURE);
+//	printf("%s\n", (char*)node->data);
 	if (!(*queue)->head)
 	{
 		(*queue)->head = node;
 		(*queue)->tail = node;
-		(*queue)->head->next = node;
+		(*queue)->head->next = (*queue)->tail;
 		(*queue)->head->prev = NULL;
-		(*queue)->tail->prev = node;
+		(*queue)->tail->prev = (*queue)->head;
 		(*queue)->tail->next = NULL;
-		node->prev = node;
-		node->next = node;
 		(*queue)->len++;
 		return (SUCCESS);
 	}

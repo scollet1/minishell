@@ -13,7 +13,7 @@ char	*nullcat(char *str, size_t len)
 			ret = mini_strdup(str);
 			str = tmp + 1;
 			len -= tmp - ret;
-			enqueue(&queue, ret, sizeof(ret));
+			enqueue(&queue, (void*)&ret, sizeof(ret));
 		}
 	}
 	return (cat_queue(&queue));

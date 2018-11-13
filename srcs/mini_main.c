@@ -31,7 +31,7 @@ int		mini_shell(t_env *env)
 	while (env->status.running)
 	{
 		/*
-		** every "cycle" of the shell we need to capture the user's input in a string
+		** every "cycle" of the shell we need to captecure the user's input in a string
 		** this determines the execution of subprocesses in the shell
 		*/
 		if ((input = mini_prompt(PROMPT)))

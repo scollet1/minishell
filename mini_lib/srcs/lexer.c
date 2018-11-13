@@ -1,65 +1,76 @@
 #include "../incl/mini_lib.h"
 
+char 	end_tok(char *start, char delim, char **token, size_t len)
+{
+	char *end;
+
+	if ((end = mini_memchr(start, delim, len)))
+	{
+		*token = strndup(start, end - start);
+		return ('!');
+	}
+	return (delim);
+}
+
 char	tokenize(char *str, t_list *delims, char **token)
 {
 	size_t	len;
 	t_node	*head;
 
 	char 	ret;
-	char	*tmp;
-	char	*end;
 	char	*start;
 
-	if (!*str || !delims)
+	if (!str || !delims)
 		return (0);
-	ret = 0;
-	end = NULL;
 	len = mini_strlen(str);
 	head = delims->head;
-	while (delims->head != delims->tail)
+	while (delims->head)
 	{
-		if (!(tmp = mini_memchr(
-				str,
-				(char)delims->head->data,
-				len
-		)))
+//		printf("%c\n", (char)delims->head->data);
+		start = mini_memchr(str, (char)delims->head->data, len);
+		if (start > str)
 		{
-			*token = strndup(str, len);
-			return ('.');
+			*token = strndup(str, start - str);
+			return '?';
 		}
-		if (mini_memcmp(tmp,
-						mini_memchr(str,
-									(char)delims->head->next->data,
-									len),
-						sizeof(tmp)) < 0)
+		if (start++)
 		{
-			start = tmp;
-			if (!(end = mini_memchr(str, (char)delims->head->data, len)))
+			if (delims->head->next)
 			{
-				*token = strndup(start, len);
-				return ((char)delims->head->data);
+				if (mini_memcmp(start, mini_memchr(str, (char)
+						delims->head->next->data, len), sizeof(start)) < 0)
+					ret = end_tok(start, (char)delims->head->data, token, len);
 			}
+			else
+				ret = end_tok(start, (char)delims->head->data, token, len);
 		}
 		delims->head = delims->head->next;
 	}
 	delims->head = head;
-	*token = strndup(start, end - start);
-	return ('!');
+	return (ret);
 }
 
-char	lex_tok(char *str, t_list **tokens, t_list **delims)
+char	lex_tok(char *str, t_list **tokens, t_list *delims)
 {
-	char	ret;
-	char	*token;
+	char ret;
+	char *token;
 
-	ret = '!';
-	while (ret != '.')
+	ret = '\0';
+	while (*str)
 	{
-		ret = tokenize(str, *delims, &token);
-//		if (!mini_strncmp(token, ret, 1))
-//			return ('!');
-		if (enqueue(tokens, token, sizeof(token)) == FAILURE)
-			return (0);
+		if ((ret = tokenize(str, delims, &token)) == '?')
+		{
+			if (enqueue(tokens, token, sizeof(token)) == FAILURE)
+				return (0);
+			str += mini_strlen(token);
+		}
+		else
+		{
+			if (enqueue(tokens, token, sizeof(token)) == FAILURE)
+				return (0);
+//			printf("%s\n", (char*)(*tokens)->head->data);
+			str += mini_strlen(token) + 2;
+		}
 	}
 	return (ret);
 }
@@ -77,8 +88,9 @@ char	lex(t_list **tokens, char *str, int args, ...)
 	{
 		arg = va_arg(ap, int);
 		enqueue(&delims, &arg, sizeof(arg));
+//		printf("%c\n", (char)delims->head->data);
 		args--;
 	}
 	va_end(ap);
-	return (lex_tok(str, tokens, &delims));
+	return (lex_tok(str, tokens, delims));
 }

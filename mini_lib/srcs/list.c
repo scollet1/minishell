@@ -12,19 +12,6 @@ t_list		*new_list(void)
 	return (list);
 }
 
-t_node		*new_node(void *data, size_t size)
-{
-	t_node *node;
-
-	if (!(node = (t_node*)memalloc(sizeof(t_node))))
-		return (NULL);
-	mini_memcpy(&node->data, &data, size);
-	node->size = size;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
-}
-
 #include <stdio.h>
 t_tree	*list_to_nary(t_list **list)
 {
