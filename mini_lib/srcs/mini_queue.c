@@ -42,7 +42,6 @@ int 	enqueue(t_list **queue, void *data, size_t size)
 		return (FAILURE);
 	if (!(node = new_node(data, size)))
 		return (FAILURE);
-//	printf("%s\n", (char*)node->data);
 	if (!(*queue)->head)
 	{
 		(*queue)->head = node;

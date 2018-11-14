@@ -140,7 +140,7 @@ char				lex(t_list **tokens, char *str, int args, ...);
 ** Lists
 */
 t_list				*new_list(void);
-t_node				*new_node(void *data, size_t size);
+t_node				*new_node(void **data, size_t size);
 t_tree				*list_to_nary(t_list **list);
 t_list				*va_to_list(va_list ap, int args);
 

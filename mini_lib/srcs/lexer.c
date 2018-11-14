@@ -9,6 +9,7 @@ char 	end_tok(char *start, char delim, char **token, size_t len)
 		*token = strndup(start, end - start);
 		return ('!');
 	}
+	*token = strndup(start, len);
 	return (delim);
 }
 
@@ -26,7 +27,6 @@ char	tokenize(char *str, t_list *delims, char **token)
 	head = delims->head;
 	while (delims->head)
 	{
-//		printf("%c\n", (char)delims->head->data);
 		start = mini_memchr(str, (char)delims->head->data, len);
 		if (start > str)
 		{
@@ -52,25 +52,23 @@ char	tokenize(char *str, t_list *delims, char **token)
 
 char	lex_tok(char *str, t_list **tokens, t_list *delims)
 {
-	char ret;
-	char *token;
+	char	ret;
+	size_t	len;
+	char	*token;
 
 	ret = '\0';
 	while (*str)
 	{
-		if ((ret = tokenize(str, delims, &token)) == '?')
+		ret = tokenize(str, delims, &token);
+		if (*token)
 		{
-			if (enqueue(tokens, token, sizeof(token)) == FAILURE)
+			len = mini_strlen(token);
+			if (enqueue(tokens, &token, len) == FAILURE)
 				return (0);
-			str += mini_strlen(token);
+			str += (ret == '?') ? len : len + 2;
 		}
 		else
-		{
-			if (enqueue(tokens, token, sizeof(token)) == FAILURE)
-				return (0);
-//			printf("%s\n", (char*)(*tokens)->head->data);
-			str += mini_strlen(token) + 2;
-		}
+			*str = 0;
 	}
 	return (ret);
 }
@@ -86,9 +84,8 @@ char	lex(t_list **tokens, char *str, int args, ...)
 	*tokens = new_list();
 	while (args)
 	{
-		arg = va_arg(ap, int);
+		arg = (char)va_arg(ap, int);
 		enqueue(&delims, &arg, sizeof(arg));
-//		printf("%c\n", (char)delims->head->data);
 		args--;
 	}
 	va_end(ap);

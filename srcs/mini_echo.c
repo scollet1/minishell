@@ -18,13 +18,17 @@ t_list	*quote_loop(const char *prompt, char q, t_list **queue)
 {
 	char	*closeq;
 
+	enqueue(queue, &(char*){"\n"}, 1);
 	while (1)
 	{
 		closeq = mini_prompt(prompt);
 		if (!strncmp(closeq, &q, 1))
 			break;
 		else
-			enqueue(queue, closeq, sizeof(closeq));
+		{
+			enqueue(queue, &closeq, mini_strlen(closeq));
+			enqueue(queue, &(char*){"\n"}, 1);
+		}
 	}
 	return (*queue);
 }
@@ -36,8 +40,6 @@ int		mini_echo(t_env *env, char **opts)
 	echo_queue = new_list();
 	if (!env || !opts)
 		return (FAILURE);
-//	printf("%s\n", opts[0]);
-//	print(1, PROMPT);
 	if (*(++opts))
 	{
 		if (!(echo_queue = open_quotes(*opts)))
