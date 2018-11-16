@@ -58,7 +58,7 @@ add_executable(minishell
 		mini_lib/srcs/striteri.c
 		mini_lib/srcs/strmap.c
 		mini_lib/srcs/strmapi.c
-		mini_lib/srcs/strncat.c
+		mini_lib/srcs/mini_strncat.c
 		mini_lib/srcs/strncpy.c
 		mini_lib/srcs/strnequ.c
 		mini_lib/srcs/strnew.c

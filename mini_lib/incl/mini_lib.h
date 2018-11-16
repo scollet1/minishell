@@ -184,6 +184,7 @@ int					enqueue(t_list **list, void *data, size_t size);
 /*
 ** Strings
 */
+int 				is_allchar(char *str, char c, size_t len);
 char				*replace(char *strn, char find, char rplc);
 void				mini_putchar(char c);
 int					mini_strncmp(const char *s1, const char *s2, size_t n);
@@ -194,9 +195,10 @@ size_t				mini_strlen(const char *s);
 ** String Addition
 */
 char				*mini_cat(int args, ...);
+char				*mini_join(char **strs, const char *delim);
 char				*mini_strncat(char *s1, const char *s2, size_t n);
-
 char				*nullcat(char *str, size_t len);
+
 void				putstr(const char *s);
 void				putendl(const char *s);
 void				putchar_fd(char c, int fd);

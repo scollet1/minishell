@@ -90,3 +90,19 @@ char	*mini_strcat(char *s1, const char *s2)
 	mini_strcpy(&s1[mini_strlen(s1)], s2);
 	return (s1);
 }
+
+char *mini_join(char **strs, const char *delim)
+{
+	char	*str;
+
+	if (!strs || !*strs)
+		return (NULL);
+	str = strndup(*strs, mini_strlen(*strs));
+	while (*(++strs))
+	{
+		if (delim)
+			str = mini_strncat(str, delim, mini_strlen(str));
+		str = mini_strncat(str, *strs, mini_strlen(str));
+	}
+	return (str);
+}

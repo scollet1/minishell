@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   mini_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scollet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incl/mini_lib.h"
 
-char	*ft_strncat(char *dst, const char *src, size_t n)
+char	*mini_strncat(char *dst, const char *src, size_t n)
 {
 	char	*ret;
 	char	*hold;
@@ -20,7 +20,7 @@ char	*ft_strncat(char *dst, const char *src, size_t n)
 	size_t	x;
 
 	hold = (char*)src;
-	ret = (char*)malloc(sizeof(char) * ft_strlen(dst) + ft_strlen(src) + 1);
+	ret = (char*)malloc(sizeof(char) * mini_strlen(dst) + mini_strlen(src) + 1);
 	ret = dst;
 	i = 0;
 	x = 0;

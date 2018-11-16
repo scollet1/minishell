@@ -35,6 +35,7 @@ t_list	*quote_loop(const char *prompt, char q, t_list **queue)
 
 int		mini_echo(t_env *env, char **opts)
 {
+	char 	*str;
 	t_list	*echo_queue;
 
 	echo_queue = new_list();
@@ -42,8 +43,13 @@ int		mini_echo(t_env *env, char **opts)
 		return (FAILURE);
 	if (*(++opts))
 	{
-		if (!(echo_queue = open_quotes(*opts)))
+		if (!(str = mini_join(opts, " ")))
+			mini_error(env, __func__, WHICH(str), "null string");
+		if (!(echo_queue = open_quotes(str)))
+		{
+			env->status.error.errcode = ERR_PROCESS;
 			mini_error(env, __func__, WHICH(echo_queue), "lexing");
+		}
 		dump_queue(&echo_queue, (void*)putstr);
 	}
 	print(1, "\n");

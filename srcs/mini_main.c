@@ -42,7 +42,7 @@ int		mini_shell(t_env *env)
 			** standardize the way we handle program flow
 			*/
 			if (mini_dispatch(env, input) == FAILURE)
-				return (mini_error(env, __func__, NULL, "dispatch failed"));
+				return (mini_error(env, __func__, WHICH(input), "dispatch failed"));
 		}
 		else
 			return (mini_error(env, __func__, WHICH(input), "NULL"));

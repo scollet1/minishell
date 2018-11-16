@@ -31,16 +31,23 @@ char	tokenize(char *str, t_list *delims, char **token)
 		if (start > str)
 		{
 			*token = strndup(str, start - str);
-			return '?';
 		}
-		if (start++)
+		if (start)
 		{
 			if (delims->head->next)
 			{
 				if (mini_memcmp(start, mini_memchr(str, (char)
-						delims->head->next->data, len), sizeof(start)) < 0)
-					ret = end_tok(start, (char)delims->head->data, token, len);
+						delims->head->next->data, len), sizeof(start)) > 0)
+				{
+					ret = end_tok(start, (char) delims->head->data, token,
+									   len);
+				}
+				else
+					ret = end_tok(start, (char) delims->head->next->data, token,
+								   len);
 			}
+//			else if (start > str)
+//				*token = strndup(str, start - str);
 			else
 				ret = end_tok(start, (char)delims->head->data, token, len);
 		}
@@ -52,10 +59,12 @@ char	tokenize(char *str, t_list *delims, char **token)
 
 char	lex_tok(char *str, t_list **tokens, t_list *delims)
 {
+	char 	c;
 	char	ret;
 	size_t	len;
 	char	*token;
 
+	c = ' ';
 	ret = '\0';
 	while (*str)
 	{
@@ -63,7 +72,12 @@ char	lex_tok(char *str, t_list **tokens, t_list *delims)
 		if (*token)
 		{
 			len = mini_strlen(token);
-			if (enqueue(tokens, &token, len) == FAILURE)
+			if (is_allchar(token, c, len) > 0)
+			{
+				if (enqueue(tokens, &" ", len) == FAILURE)
+					return (0);
+			}
+			else if (enqueue(tokens, &token, len) == FAILURE)
 				return (0);
 			str += (ret == '?') ? len : len + 2;
 		}

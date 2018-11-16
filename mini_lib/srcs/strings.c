@@ -7,6 +7,19 @@ char	*catfun(char *str, char chr)
 	return (str);
 }
 
+int 	is_allchar(char *str, char c, size_t len)
+{
+	size_t i;
+
+	i = 0;
+	if (!str || !len)
+		return (-1);
+	while (i < len)
+		if (str[i++] != c)
+			return (0);
+	return (1);
+}
+
 char	*replace(char *strn, char find, char rplc)
 {
 	int		i;
