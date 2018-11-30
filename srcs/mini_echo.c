@@ -9,7 +9,7 @@ t_list	*open_quotes(char *str)
 	q = lex(&tokens, str, 2, '\"', '\'');
 	if (!q)
 		return (NULL);
-	else if (q != '!' && q != '.')
+	else if (q == '\'' || q == '\"')
 		return (quote_loop("quote> ", q, &tokens));
 	return (tokens);
 }

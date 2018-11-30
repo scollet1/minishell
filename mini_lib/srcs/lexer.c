@@ -16,14 +16,30 @@ char 	end_tok(char *start, char delim, char **token, size_t len)
 char	tokenize(char *str, t_list *delims, char **token)
 {
 	size_t	len;
-	t_node	*head;
-
-	char 	ret;
-	char	*start;
+//	t_node	*head;
+	char 	c;
+	char	*end;
 
 	if (!str || !delims)
 		return (0);
 	len = mini_strlen(str);
+	while (*str)
+	{
+		if (*str == '\'' || *str == '\"')
+		{
+			c = *str++;
+			if (!(end = mini_memchr(str, c, len)))
+			{
+				*token = strndup(str, len);
+//				printf("%s\n", *token);
+				return (c);
+			}
+			*token = strndup(str, end - str);
+		}
+		str = end;
+	}
+	return ('!');
+	/*
 	head = delims->head;
 	while (delims->head)
 	{
@@ -55,6 +71,7 @@ char	tokenize(char *str, t_list *delims, char **token)
 	}
 	delims->head = head;
 	return (ret);
+	 */
 }
 
 char	lex_tok(char *str, t_list **tokens, t_list *delims)
@@ -84,6 +101,7 @@ char	lex_tok(char *str, t_list **tokens, t_list *delims)
 		else
 			*str = 0;
 	}
+//	printf("%c\n", ret);
 	return (ret);
 }
 

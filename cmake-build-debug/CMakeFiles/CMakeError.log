@@ -1,0 +1,105 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+/usr/bin/x86_64-linux-gnu-ld: cannot find Scrt1.o: No such file or directory
+/usr/bin/x86_64-linux-gnu-ld: cannot find crti.o: No such file or directory
+collect2: error: ld returned 1 exit status
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: CMAKE_CXX_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+No such file or directory
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /home/samurai/minishell/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_86b38/fast"
+/usr/bin/make -f CMakeFiles/cmTC_86b38.dir/build.make CMakeFiles/cmTC_86b38.dir/build
+make[1]: Entering directory '/home/samurai/minishell/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_86b38.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_86b38.dir/testCCompiler.c.o   -c /home/samurai/minishell/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_86b38
+/home/samurai/clion-2018.3/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_86b38.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_86b38.dir/testCCompiler.c.o  -o cmTC_86b38 
+/usr/bin/x86_64-linux-gnu-ld: cannot find Scrt1.o: No such file or directory
+/usr/bin/x86_64-linux-gnu-ld: cannot find crti.o: No such file or directory
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_86b38.dir/build.make:86: recipe for target 'cmTC_86b38' failed
+make[1]: *** [cmTC_86b38] Error 1
+make[1]: Leaving directory '/home/samurai/minishell/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_86b38/fast' failed
+make: *** [cmTC_86b38/fast] Error 2
+
+

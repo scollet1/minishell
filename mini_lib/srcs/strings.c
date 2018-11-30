@@ -22,10 +22,8 @@ int 	is_allchar(char *str, char c, size_t len)
 
 char	*replace(char *strn, char find, char rplc)
 {
-	int		i;
 	int 	len;
 
-	i = -1;
 	len = mini_strlen(strn);
 	while (*strn)
 	{
