@@ -32,17 +32,21 @@ char	tokenize(char *str, t_list *delims, char **token)
         printf("token %s returning %c\n", *token, c);
         return (c);
     }
-	printf("sing %s doub %s\n", singq, doubq);
+	printf("sing %s doub %s str %s\n", singq, doubq, str);
     if (singq) {
         if (doubq) {
             if (singq < doubq) {
                 printf("sinq %s doub %s\n", singq, doubq);
-                if (singq > str)
+                if (singq > str) {
+                    printf("sing > str\n");
                     return function('!', token, str, singq - str);
+                }
                 else if (!(end = mini_memchr(++singq, '\'', len)))
                     return function('\'', token, ++str, len);
-                else
-                    return function('!', token, str, end - singq);
+                else {
+                    printf("%s %s\n", end, singq);
+                    return function('!', token, str, ++end - singq);
+                }
             }
             else if (doubq > str) {
                 return function('!', token, str, doubq - str);
@@ -52,10 +56,12 @@ char	tokenize(char *str, t_list *delims, char **token)
             else
                 return function('!', token, str, end - doubq);
         }
-        else if (!(end = mini_memchr(++singq, '\'', len)))
+        else if (!(end = mini_memchr(singq, '\'', len)))
             return function('\'', token, ++str, len);
-        else
-            return function('!', token, str, end - singq);
+        else {
+            printf("%s %s\n", end, singq);
+            return function('!', token, str, ++end - singq);
+        }
     }
 	else if (doubq)
 	{
@@ -134,8 +140,6 @@ char	lex_tok(char *str, t_list **tokens, t_list *delims)
 			str += ret == '!' ? len:len + 2;
 			printf("str %s\n", str);
 		}
-		else
-			*str = 0;
 	}
 //	printf("%c\n", ret);
 	return (ret);
