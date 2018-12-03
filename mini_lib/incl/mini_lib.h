@@ -6,7 +6,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-
+# include <stdbool.h>
 # include <stdio.h>
 
 # if __STDC_VERSION__ < 199901L
@@ -169,7 +169,7 @@ void				putnbr_fd(int n, int fd);
 /*
 ** Stack
 */
-void				dump_stack(t_list *list, void (*func)(void*));
+int				dump_stack(t_list *list, void (*func)(void*), bool dump);
 t_node				*pop(t_list **list);
 int					push(t_list **list, void *data, size_t size);
 
@@ -178,7 +178,7 @@ int					push(t_list **list, void *data, size_t size);
 */
 char				*cat_queue(t_list **queue);
 t_node				*dequeue(t_list **queue);
-void				dump_queue(t_list **queue, void (*func)(void*));
+int	    			dump_queue(t_list **queue, void (*func)(void*), bool dump);
 int					enqueue(t_list **list, void *data, size_t size);
 
 /*

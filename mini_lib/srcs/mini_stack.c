@@ -1,17 +1,22 @@
 #include "../incl/mini_lib.h"
 
-void		dump_stack(t_list *stack, void (*func)(void*))
+int			dump_stack(t_list *stack, void (*func)(void*), bool dump)
 {
 	t_node *head;
 
 	if (!stack || !func)
-		return ;
+		return (FAILURE);
 	head = stack->head;
 	while (head != stack->tail)
 	{
-		func(head->data);
-		pop(&stack);
+        void function(t_node **head)
+        {
+            *head = (*head)->next;
+        }
+        func(head->data);
+		dump? pop(&stack) : function(&head);
 	}
+	return (SUCCESS);
 }
 
 t_node		*pop(t_list **stack)

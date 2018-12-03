@@ -50,7 +50,8 @@ int		mini_echo(t_env *env, char **opts)
 			env->status.error.errcode = ERR_PROCESS;
 			mini_error(env, __func__, WHICH(echo_queue), "lexing");
 		}
-		dump_queue(&echo_queue, (void*)putstr);
+		if (dump_queue(&echo_queue, (void*)putstr, true) == FAILURE)
+			return (FAILURE);
 	}
 	print(1, "\n");
 	return (SUCCESS);

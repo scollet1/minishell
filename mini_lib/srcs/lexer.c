@@ -16,29 +16,63 @@ char 	end_tok(char *start, char delim, char **token, size_t len)
 char	tokenize(char *str, t_list *delims, char **token)
 {
 	size_t	len;
-//	t_node	*head;
-	char 	c;
+
 	char	*end;
+	char    *doubq;
+	char	*singq;
 
 	if (!str || !delims)
 		return (0);
 	len = mini_strlen(str);
-	while (*str)
+    singq = mini_memchr(str, '\'', len);
+    doubq = mini_memchr(str, '\"', len);
+
+    char function(char c, char **token, char *str, size_t len) {
+        *token = strndup(str, len);
+        printf("token %s returning %c\n", *token, c);
+        return (c);
+    }
+	printf("sing %s doub %s\n", singq, doubq);
+    if (singq) {
+        if (doubq) {
+            if (singq < doubq) {
+                printf("sinq %s doub %s\n", singq, doubq);
+                if (singq > str)
+                    return function('!', token, str, singq - str);
+                else if (!(end = mini_memchr(++singq, '\'', len)))
+                    return function('\'', token, ++str, len);
+                else
+                    return function('!', token, str, end - singq);
+            }
+            else if (doubq > str) {
+                return function('!', token, str, doubq - str);
+            }
+            else if (!(end = mini_memchr(++doubq, '\"', len)))
+                return function('\"', token, ++str, len);
+            else
+                return function('!', token, str, end - doubq);
+        }
+        else if (!(end = mini_memchr(++singq, '\'', len)))
+            return function('\'', token, ++str, len);
+        else
+            return function('!', token, str, end - singq);
+    }
+	else if (doubq)
 	{
-		if (*str == '\'' || *str == '\"')
-		{
-			c = *str++;
-			if (!(end = mini_memchr(str, c, len)))
-			{
-				*token = strndup(str, len);
-//				printf("%s\n", *token);
-				return (c);
-			}
-			*token = strndup(str, end - str);
-		}
-		str = end;
-	}
-	return ('!');
+        printf("doub %s\n", doubq);
+        if (doubq > str) {
+            *token = strndup(str, doubq - str);
+            printf("%s\n", *token);
+        }
+	    else if (!(end = mini_memchr(++doubq, '\"', len)))
+	        return function('\"', token, ++str, len);
+	    else
+	        *token = strndup(str, end - doubq);
+	    printf("end %s\n", end);
+    }
+	else
+        *token = strndup(str, len);
+ 	return ('!');
 	/*
 	head = delims->head;
 	while (delims->head)
@@ -96,7 +130,9 @@ char	lex_tok(char *str, t_list **tokens, t_list *delims)
 			}
 			else if (enqueue(tokens, &token, len) == FAILURE)
 				return (0);
-			str += (ret == '?') ? len : len + 2;
+			printf("return tok %s\n", token);
+			str += ret == '!' ? len:len + 2;
+			printf("str %s\n", str);
 		}
 		else
 			*str = 0;

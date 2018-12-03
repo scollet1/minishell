@@ -12,21 +12,23 @@ char	*cat_queue(t_list **queue)
 	return (str);
 }
 
-void	dump_queue(t_list **queue, void (*func)(void*))
+int		dump_queue(t_list **queue, void (*func)(void*), bool dump)
 {
-	t_node *node;
+	t_node *tail;
 
 	if (!queue || !func)
-		return ;
-	while ((*queue)->tail)
+		return (FAILURE);
+    tail = (*queue)->tail;
+    while ((*queue)->tail)
 	{
-		if ((node = dequeue(queue)))
-		{
-			func(node->data);
-			free(node);
-			node = NULL;
-		}
+        func((*queue)->tail->data);
+        if (dump)
+		    free(dequeue(queue));
+        else
+            (*queue)->tail = (*queue)->tail->prev;
 	}
+    (*queue)->tail = tail;
+	return (SUCCESS);
 }
 
 t_node	*dequeue(t_list **queue)
